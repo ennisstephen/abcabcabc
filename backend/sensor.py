@@ -92,4 +92,4 @@ class Sensor:
         while True:
             for city in self.cities:
                 self.fetch_weather(city)
-                time.sleep(600)
+                time.sleep(60)
