@@ -1,0 +1,21 @@
+# Exclude Python cache files and directories
+__pycache__/
+*.pyc
+
+# Exclude the tests directory
+tests/
+
+# Exclude the .git directory
+.git/
+
+# Exclude Dockerfile and .dockerignore (optional)
+Dockerfile
+.dockerignore
+
+# Exclude virtual environments
+venv/
+env/
+
+# Exclude OS-specific files
+.DS_Store
+Thumbs.db

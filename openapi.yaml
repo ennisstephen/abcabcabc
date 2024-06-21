@@ -1,0 +1,99 @@
+openapi: 3.0.0
+info:
+  title: Weather Data API
+  version: 1.0.0
+  description: API for retrieving weather data statistics.
+servers:
+  - url: http://localhost:5000
+    description: Local server
+paths:
+  /v1/weather:
+    get:
+      summary: Get weather statistics for a city
+      description: Retrieve statistical weather data for a specific city within a given date range.
+      parameters:
+        - name: stat
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: ['AVG', 'MAX', 'MIN', 'AVG']
+          description: The statistical operation to perform.
+        - name: metric
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: ['TEMPERATURE', 'HUMIDITY', 'WIND_KPH']
+          description: The weather metric to retrieve.
+        - name: city
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The city to retrieve the data for. (Default is Galway)
+        - name: start_date
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+          description: The start date for the data retrieval. Format YYYY-MM-DD
+        - name: end_date
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+          description: The end date for the data retrieval. Format YYYY-MM-DD
+      responses:
+        '200':
+          description: Successful retrieval of weather data statistics.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  city:
+                    type: string
+                    description: The city for which the data was retrieved.
+                  start_date:
+                    type: string
+                    format: date
+                    description: The start date for the data retrieval.
+                  end_date:
+                    type: string
+                    format: date
+                    description: The end date for the data retrieval.
+                  metric:
+                    type: string
+                    description: The weather metric.
+                  stat:
+                    type: number
+                    description: The calculated weather statistic value.
+        '400':
+          description: Bad request due to invalid parameters.
+        '500':
+          description: Internal server error.
+components:
+  schemas:
+    WeatherResponse:
+      type: object
+      properties:
+        city:
+          type: string
+          description: The city for which the data was retrieved.
+        start_date:
+          type: string
+          format: date
+          description: The start date for the data retrieval.
+        end_date:
+          type: string
+          format: date
+          description: The end date for the data retrieval.
+        metric:
+          type: string
+          description: The weather metric.
+        stat:
+          type: number
+          description: The calculated weather statistic value.
