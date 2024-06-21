@@ -18,7 +18,7 @@ python run.py
 ```
 4. **Run tests**
 ```bash
-pytest --verbose
+pytest3 --verbose
 ```
 5. **Example queries**
 ```
